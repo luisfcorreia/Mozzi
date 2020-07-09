@@ -47,7 +47,7 @@ public:
 
 
 	/** Set the cut off frequency,
-	@param cutoff use the range 0-255 to represent 0-8192 Hz (AUDIO_RATE/2).
+	@param cutoff use the range 0-255 to represent 0-8191 Hz (AUDIO_RATE/2).
 	Be careful of distortion at the lower end, especially with high resonance.
 	*/
 	void setCutoffFreq(uint8_t cutoff)
@@ -58,7 +58,9 @@ public:
 
 
 	/** Set the resonance. If you hear unwanted distortion, back off the resonance.
+	After setting resonance, you need to call setCuttoffFreq() to hear the change!
 	@param resonance in the range 0-255, with 255 being most resonant.
+	@note	Remember to call setCuttoffFreq() after resonance is changed!
 	*/
 	void setResonance(uint8_t resonance)
 	{
@@ -102,14 +104,14 @@ private:
 	{
 		return (((unsigned int)a*b)>>FX_SHIFT);
 	}
-	
+
 		// multiply two fixed point numbers (returns fixed point)
 	inline
 	int ifxmul(int a, uint8_t b)
 	{
 		return ((a*b)>>FX_SHIFT);
 	}
-	
+
 	// multiply two fixed point numbers (returns fixed point)
 	inline
 	long fxmul(long a, int b)
